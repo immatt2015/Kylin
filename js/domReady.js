@@ -6,7 +6,7 @@
  * DOM Ready for Internet Explorer 9 and Above
  */
 
-var domReady = function(callback) {
+var domReady = function (callback) {
     document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
 };
 
@@ -15,11 +15,11 @@ var domReady = function(callback) {
  * This method, while not nearly as simple as the first, provides the highest level of compatibility with browsers. It's based on the source code to version 1.11.3 of jQuery.
  */
 
-var domReady1 = function(callback) {
+var domReady1 = function (callback) {
     var ready = false;
 
-    var detach = function() {
-        if(document.addEventListener) {
+    var detach = function () {
+        if (document.addEventListener) {
             document.removeEventListener("DOMContentLoaded", completed);
             window.removeEventListener("load", completed);
         } else {
@@ -27,17 +27,17 @@ var domReady1 = function(callback) {
             window.detachEvent("onload", completed);
         }
     }
-    var completed = function() {
-        if(!ready && (document.addEventListener || event.type === "load" || document.readyState === "complete")) {
+    var completed = function () {
+        if (!ready && (document.addEventListener || event.type === "load" || document.readyState === "complete")) {
             ready = true;
             detach();
             callback();
         }
     };
 
-    if(document.readyState === "complete") {
+    if (document.readyState === "complete") {
         callback();
-    } else if(document.addEventListener) {
+    } else if (document.addEventListener) {
         document.addEventListener("DOMContentLoaded", completed);
         window.addEventListener("load", completed);
     } else {
@@ -48,15 +48,16 @@ var domReady1 = function(callback) {
 
         try {
             top = window.frameElement == null && document.documentElement;
-        } catch(e) {}
+        } catch (e) {
+        }
 
-        if(top && top.doScroll) {
+        if (top && top.doScroll) {
             (function scrollCheck() {
-                if(ready) return;
+                if (ready) return;
 
                 try {
                     top.doScroll("left");
-                } catch(e) {
+                } catch (e) {
                     return setTimeout(scrollCheck, 50);
                 }
 
@@ -69,6 +70,6 @@ var domReady1 = function(callback) {
 };
 
 // 使用方法
-domReady(function(){
+domReady(function () {
     // do sth
 });
