@@ -4,8 +4,36 @@
 	<meta charset="UTF-8">
 	<title>Geolocation App</title>
 </head>
-<body>
+<body onload="loadDemo()">
+	<header>
+		<h1>Odometer Demo</h1>
+		<h4>Live Race Date!</h4>
+	</header>
+	<div class="container">
+		<section>
+			<article>
+				<header>
+					<h1>Your Location</h1>
+				</header>
+				<p class="info" id="status">Geolocation is not supported in your browser.</p>
+				<div class="geostatus">
+					<p id="latitude">Latitude:</p>
+					<p id="longitude">Longitude:</p>
+					<p id="accuracy">Accuracy:</p>
+					<p id="timestamp">Timestamp:</p>
+					<p id="currDist">Current distance traveled:</p>
+					<p id="totalDist">Total distance traveled:</p>
+				</div>
+			</article>
+		</section>
+		<footer>
+			<h2>Powered by HTML5, and your feet!</h2>
+		</footer>
+	</div>
+
 	<script type="text/javascript">
+
+		// 距离测算公式
 		Number.prototype.toRadians = function(){
 			return this * Math.PI /180;
 		}
@@ -24,6 +52,75 @@
 			var d = R * c;
 
 			return d;
+		}
+
+		// App
+		var totalDistance = 0.0;
+		var lastLat;
+		var lastLong;
+
+		function updateErrorStatus(message) {
+			document.getElementById('status').style.background = 'papayaWhip';
+			document.getElementById('status').innerHTML = '<strong>Error</strong>:'+ message;
+		}
+		function updateStatus(message) {
+			document.getElementById('status').style.background = 'paleGreen';
+			document.getElementById('status').innerHTML = message;
+		}
+		function loadDemo() {
+			if(navigator.geolocation){
+				status.innerHTML = 'HTML5 Geolocation is supported in your browser.';
+				navigator.geolocation.watchPosition(updateLocation, handleLocationError,{timeout:10000})
+			}
+		}
+
+		function handleLocationError(error){
+			switch(error.code){
+				case 0:
+					updateStatus('There was an error while relrieving your location: ' + error.message);
+					break;
+				case 1:
+					updateStatus('The user prevented this page from retrieving a location.');
+					break;
+				case 2:
+					updateStatus('The browser was unabel to determine your location:' + error.message);
+					break;
+				case 3:
+					updateStatus('The browser timed out before retrieving the location.');
+					break;
+			}
+		}
+
+		function updateLocation(position){
+			var latitude = position.coords.latitude;
+			var longitude = position.coords.longitude;
+			var accuracy = position.coords.accuracy;
+			var timestamp = position.timestamp;
+
+			document.getElementById('latitude').innerHTML ='Latitude:' + latitude;
+			document.getElementById('longitude').innerHTML ='Longitude:' + longitude;
+			document.getElementById('accuracy').innerHTML = 'Accuracy:' + accuracy;
+			document.getElementById('timestamp').innerHTML = 'Timestamp' + timestamp;
+
+			if(accuracy >= 30000){
+				updateStatus("Need more accurate values to calculate distance.");
+				return;
+			}
+
+			if((lastLat != null) && (lastLong != null)){
+				var currentDistance = distance(latitude, longitude, lastLat, lastLong);
+
+				totalDistance += currentDistance;
+
+				document.getElementById('currDist').innerHTML = 'Current distance traveled:'+ currentDistance.toFixed(2) + 'km';
+
+				updateStatus('Location successfully updated.')
+			}
+
+			lastLat = latitude;
+			lastLong = longitude;
+
+			document.getElementById('totalDist').innerHTML = 'Total distance traveled:' + totalDistance.toFixed(2) + 'km';
 		}
 	</script>
 </body>
