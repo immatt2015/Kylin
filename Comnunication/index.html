@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*window.addEventListener('message', messageHandler, true);
+    function messageHandler(e) {
+        switch (e.origin){
+            case 'friend.example.com':
+                processMessage(e.data);
+                break;
+            default:
+        }
+    }*/
+    if(typeof window.postMessage === "undefined"){
+        console.log('You browser is not support postMessage API.')
+    }
+    window.postMessage('Hello world', 'portal.example.com');
+
+</script>
+</body>
+</html>

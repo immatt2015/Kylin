@@ -1,0 +1,23 @@
+{
+  "name": "html5",
+  "version": "1.0.0",
+  "description": "HTML5 API Learn",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvKylin/H5.git"
+  },
+  "author": "kylin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvKylin/H5/issues"
+  },
+  "homepage": "https://github.com/EvKylin/H5#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2"
+  }
+}
