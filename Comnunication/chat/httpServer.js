@@ -32,6 +32,8 @@ http.createServer(function (req, res) {
                 case ".png":
                     res.writeHead(200, {"Content-Type": "image/png"});
                     break;
+                case ".manifest":
+                    res.writeHead(200, {"Content-Type": "text/cache-manifest"});
                 default:
                     res.writeHead(200, {"Content-Type": "application/octet-stream"});
             }
