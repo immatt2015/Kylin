@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# 要缓存的文件
+CACHE:
+index.html
+postMessagePortal.html
+# 暂不缓存的文件
+NETWORK:
+a.js
+FALLBACK:
+postMessageWidgets.html postMessageWidget.html
