@@ -21,14 +21,13 @@ class App extends Component {
       index: 0,
       step: 0,
       submitData: {
-        sex: '',
+        sex: '男',
         date: '',
         height: '33',
         weight: '23'
       }
     }
   }
-
  /* componentDidUpdate(prevProps, prevState) {
     console.log(this.state)
     if (prevState.step !== this.state.step) {
@@ -92,12 +91,12 @@ class App extends Component {
   }
 
   updateHandler(event){
-    /*event.target.focus();
-    console.log(event.target)*/
+
     this.setState({
       submitData: Object.assign(this.state.submitData, {height: event.target.value})
     });
 
+    console.log(event.target);
   }
 
   render() {

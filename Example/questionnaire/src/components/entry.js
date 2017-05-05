@@ -68,11 +68,12 @@ const getDatetimeSelected = (value)=> {
 }
 
 export default class Entry extends Component {
+
   constructor(props){
     super(props);
     this.state ={
       sexPickerShow: false,
-        sexPickerValue: '',
+        sexPickerValue: this.props.data.sex,
         sexPickerGroup: [{items: [{label: '男'}, {label: '女'}]}],
 
         datetimePickerShow: false,
@@ -83,7 +84,7 @@ export default class Entry extends Component {
   }
 
   render() {
-    const {weight, height} = this.props.data;
+    const {weight, height, sex} = this.props.data;
     return (
       <Panel>
         <PanelHeader>营养调查问卷</PanelHeader>
@@ -92,7 +93,9 @@ export default class Entry extends Component {
             <h3>测试须知</h3>
             <p>本问卷是为了调研日常生活中的基本营养健康膳食习惯，便于营养专家了解被测者的营养健康膳食行为缺陷，通过大数据分析，制定个性化的幼儿园/学校食堂营养改善计划和家庭营养改善计划。</p>
           </Article>
-
+          {
+            console.log(this.props.data)
+          }
           <Form>
             <FormCell>
               <CellHeader>
@@ -105,8 +108,9 @@ export default class Entry extends Component {
                          this.setState({sexPickerShow: true})
                        }}
                        placeholder="请您的选择性别"
-                       value={this.state.sexPickerValue}
+                       value={sex}
                        readOnly={true}
+                       onChange={this.props.updateHandler}
                 />
               </CellBody>
             </FormCell>
@@ -128,8 +132,7 @@ export default class Entry extends Component {
                 <Label>身高</Label>
               </CellHeader>
               <CellBody>
-                <input type="number" ref="height" className="weui-input" value={height} onChange={this.props.updateHandler}
-                       placeholder="请填写您的身高"/>
+                <input type="number" ref="height" className="weui-input" value={height} onChange={this.props.updateHandler} placeholder="请填写您的身高"/>
               </CellBody>
             </FormCell>
             <FormCell>
