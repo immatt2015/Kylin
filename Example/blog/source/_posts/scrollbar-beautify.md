@@ -1,8 +1,13 @@
 ---
-title: 浏览器滚动条美化（包括CSS3纯样式定义）
+title: 浏览器滚动条优化
 date: 2017-05-05 10:55:58
-tags: CSS CSS3 JavaScript Plugs
-category: CSS
+categories:
+- Plugs
+tags:
+- CSS
+- CSS3
+- JS
+- Plugs
 ---
 
 由于平台不同，或用户采用的浏览器不同，或因同浏览器版本不同，都或多或少存在一定的差别，造成与UI设计图有一定的差别，影响用户视觉体验。那么目前这类问题常采用的方法都有那些嗯？
