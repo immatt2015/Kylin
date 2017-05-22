@@ -86,7 +86,8 @@ div {
       overflow: hidden; }
     #header .site-name #logo {
       font: bold 38px/1.12 "Times New Roman", Georgia, Times, sans-serif;
-      color: #555; }
+      color: #555;
+      text-transform: uppercase; }
       #header .site-name #logo:hover,
       #header .site-name #logo span {
         color: #777; }
